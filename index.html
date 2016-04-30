@@ -1,72 +1,85 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <title>Edificios y Farolas Cáceres 3D</title>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
-  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
-  <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
-
-  <style>
-    html, body,#map {
-      width:100%; 
-      height:100%; 
-      padding: 0; 
-      margin: 0;
-    }
-  </style>
-</head>
-
-<body>
+  <head>
+    <title>Edificios y Farolas Cáceres 3D</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	  <!-- include cartodb css  -->
+    <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+    <!-- include cartodb.js library -->
+    <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+    
+	  <style type="text/css">
+     html,body,#map{
+        width: 100%;
+        height: 100%;
+        margin: 0;
+     }
+    </style>
+  </head>
   
-  <!--Map-->
-  <div id='map'></div>
-
-  <!--Legend-->
-  <div class='cartodb-legend category'> 
-    <div class="legend-title">TIPO DE LÁMPARA</div>
-    <ul>
-      <li>
-        <div class="bullet" style="background: #A6CEE3"></div> Fluorescente (F)
-      </li>
-      <li>
-        <div class="bullet" style="background: #1F78B4"></div> FCBC
-      </li>
-      <li>
-       <div class="bullet" style="background: #B2DF8A"></div> Halógena (H)
-      </li>
-      <li>
-        <div class="bullet" style="background: #33A02C"></div> Halogenuros metálicos (HM)
-      </li>
-      <li>
-        <div class="bullet" style="background: #FB9A99"></div> Incandescencia (I)
-      </li>
-      <li>
-        <div class="bullet" style="background: #E31A1C"></div> MC
-      </li>
-      <li>
-        <div class="bullet" style="background: #FDBF6F"></div> PAR
-      </li>
-      <li>
-        <div class="bullet" style="background: #FF7F00"></div> Vapor Mercurio Color Corregido (VMCC)
-      </li>
-      <li>
-        <div class="bullet" style="background: #CAB2D6"></div> Vapor Sodio Alta Presión (VSAP)
-      </li>
-      <li>
-        <div class="bullet" style="background: #6A3D9A"></div> Vapor Sodio Baja Presión (VSBP)
-      </li>
-      <li>
-        <div class="bullet" style="background: #DDDDDD"></div> LED
-      </li>
-    </ul>
-  </div>
-  
-  <script type="text/javascript">
-    function main() {
-
-      //Edificios
+  <body>
+    <!-- define map object-->
+    <div id="map"></div>
+	
+  	<!--Legend-->
+    <div class='cartodb-legend category'> 
+    	<div class="legend-title">TIPO DE LÁMPARA</div>
+    	<ul>
+    	  <li>
+    		<div class="bullet" style="background: #A6CEE3"></div> Fluorescente (F)
+    	  </li>
+    	  <li>
+    		<div class="bullet" style="background: #1F78B4"></div> FCBC
+    	  </li>
+    	  <li>
+    	   <div class="bullet" style="background: #B2DF8A"></div> Halógena (H)
+    	  </li>
+    	  <li>
+    		<div class="bullet" style="background: #33A02C"></div> Halogenuros metálicos (HM)
+    	  </li>
+    	  <li>
+    		<div class="bullet" style="background: #FB9A99"></div> Incandescencia (I)
+    	  </li>
+    	  <li>
+    		<div class="bullet" style="background: #E31A1C"></div> MC
+    	  </li>
+    	  <li>
+    		<div class="bullet" style="background: #FDBF6F"></div> PAR
+    	  </li>
+    	  <li>
+    		<div class="bullet" style="background: #FF7F00"></div> Vapor Mercurio Color Corregido (VMCC)
+    	  </li>
+    	  <li>
+    		<div class="bullet" style="background: #CAB2D6"></div> Vapor Sodio Alta Presión (VSAP)
+    	  </li>
+    	  <li>
+    		<div class="bullet" style="background: #6A3D9A"></div> Vapor Sodio Baja Presión (VSBP)
+    	  </li>
+    	  <li>
+    		<div class="bullet" style="background: #DDDDDD"></div> LED
+    	  </li>
+    	</ul>
+    </div>
+    
+    <script>
+      // define map object
+      var map;
+     
+      function main() {
+      // define map properties
+      map = L.map('map', {
+        zoomControl: true,
+        center: [39.475193, -6.371393],
+        zoom: 18
+      });
+      // add basemap to the map object
+      L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',{
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+      }).addTo(map);
+        
+      var sublayers = [];
+        
+      // Edificios
       var style = [
         '#edificios_caceres{',
         ' polygon-opacity: 0.0;',
@@ -95,23 +108,23 @@
       ].join('\n');
 
       
-      //Farolas
+      // Farolas
       var style3 = [
         '#farolas_circulos{',
         ' polygon-opacity: 0.0;',
         '  line-opacity:0;',
         '  line-color: #FFFFFF;',
-        '  [om_altura>0]{',
-        '    [om_tipolam="F"] {polygon-fill: #A6CEE3;}',
-        '    [om_tipolam="FCBC"] {polygon-fill: #1F78B4;}',
-        '    [om_tipolam="H"] {polygon-fill: #B2DF8A;}',
-        '    [om_tipolam="HM"] {polygon-fill: #33A02C;}',
-        '    [om_tipolam="I"] {polygon-fill: #FB9A99;}',
-        '    [om_tipolam="MC"] {polygon-fill: #E31A1C;}',
-        '    [om_tipolam="PAR"] {polygon-fill: #FDBF6F;}',
-        '    [om_tipolam="VMCC"] {polygon-fill: #FF7F00;}',
-        '    [om_tipolam="VSAP"] {polygon-fill: #CAB2D6;}',
-        '    [om_tipolam="VSBP"] {polygon-fill: #6A3D9A;}',
+        '  [altura>0]{',
+        '    [tipo_lampara="F"] {polygon-fill: #A6CEE3;}',
+        '    [tipo_lampara="FCBC"] {polygon-fill: #1F78B4;}',
+        '    [tipo_lampara="H"] {polygon-fill: #B2DF8A;}',
+        '    [tipo_lampara="HM"] {polygon-fill: #33A02C;}',
+        '    [tipo_lampara="I"] {polygon-fill: #FB9A99;}',
+        '    [tipo_lampara="MC"] {polygon-fill: #E31A1C;}',
+        '    [tipo_lampara="PAR"] {polygon-fill: #FDBF6F;}',
+        '    [tipo_lampara="VMCC"] {polygon-fill: #FF7F00;}',
+        '    [tipo_lampara="VSAP"] {polygon-fill: #CAB2D6;}',
+        '    [tipo_lampara="VSBP"] {polygon-fill: #6A3D9A;}',
         '    polygon-opacity: 0.7;',
         '    line-opacity:0.3;',
         '    line-color: #FFFFFF;',
@@ -123,59 +136,53 @@
         '    }',
         '    [zoom >16]{',
         '      line-color: rgba(0,0,0,0.3);',
-        '      [om_tipolam="F"] {building-fill: #A6CEE3;}',
-        '      [om_tipolam="FCBC"] {building-fill: #1F78B4;}',
-        '      [om_tipolam="H"] {building-fill: #B2DF8A;}',
-        '      [om_tipolam="HM"] {building-fill: #33A02C;}',
-        '      [om_tipolam="I"] {building-fill: #FB9A99;}',
-        '      [om_tipolam="MC"] {building-fill: #E31A1C;}',
-        '      [om_tipolam="PAR"] {building-fill: #FDBF6F;}',
-        '      [om_tipolam="VMCC"] {building-fill: #FF7F00;}',
-        '      [om_tipolam="VSAP"] {building-fill: #CAB2D6;}',
-        '      [om_tipolam="VSBP"] {building-fill: #6A3D9A;}',
+        '      [tipo_lampara="F"] {building-fill: #A6CEE3;}',
+        '      [tipo_lampara="FCBC"] {building-fill: #1F78B4;}',
+        '      [tipo_lampara="H"] {building-fill: #B2DF8A;}',
+        '      [tipo_lampara="HM"] {building-fill: #33A02C;}',
+        '      [tipo_lampara="I"] {building-fill: #FB9A99;}',
+        '      [tipo_lampara="MC"] {building-fill: #E31A1C;}',
+        '      [tipo_lampara="PAR"] {building-fill: #FDBF6F;}',
+        '      [tipo_lampara="VMCC"] {building-fill: #FF7F00;}',
+        '      [tipo_lampara="VSAP"] {building-fill: #CAB2D6;}',
+        '      [tipo_lampara="VSBP"] {building-fill: #6A3D9A;}',
         '      building-fill-opacity: 1;',
-        '      building-height: [om_altura];',
+        '      building-height: [altura];',
         '    }',
         '  }',
         '}'
       ].join('\n');
-
-      var map = new L.Map('map', {
-            zoomControl: true,
-            center: [39.475193, -6.371393],
-            zoom: 18
-
-          });
+	  
+	  
+      cartodb.createLayer(map, {
+          user_name: 'oddfarolas',
+          type: 'cartodb',
+           sublayers: [
+               {
+               type: "mapnik", // edificios
+               sql: 'SELECT * FROM edificios_caceres ORDER BY ST_YMax(the_geom) DESC',
+               cartocss: style
+            },
+            {
+			 type: "mapnik", // farolas
+               sql: 'SELECT * FROM farolas_circulos ORDER BY ST_YMax(the_geom) DESC',
+               cartocss: style3
+            }
+         ],
+       })
+       .addTo(map)
+       .done(function(layers) {
         
-          cartodb.createLayer(map, {
-            user_name: 'oddfarolas',
-            type: 'cartodb',
-            sublayers: [
-              {
-                type: "http", // add basemap without labels
-                urlTemplate: "http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-                subdomains: [ "a", "b", "c" ]
-              },
-              {
-                 type: "mapnik", // buildings
-                 sql: 'SELECT * FROM edificios_caceres ORDER BY ST_YMax(the_geom) DESC',
-                 cartocss: style
-              },
-              {
-                 type: "mapnik", // luminarias
-                 sql: 'SELECT * FROM farolas_circulos ORDER BY ST_YMax(the_geom) DESC',
-                 cartocss: style3
-              },
-              //{
-              //  type: "http", // add basemap labels
-              //  urlTemplate: "http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-              //  subdomains: [ "a", "b", "c" ]
-              //},
-            ]
-          })
-        .addTo(map);
-      }
+      // define sublayer
+      var sublayer = layers.getSubLayer(1);
+      
+      // add infowindow interactivity to the sublayer
+       cartodb.vis.Vis.addInfowindow(map, sublayer, ['potencia','altura','tipo_lampara']);
+         
+      })
+    }
+ 
       window.onload = main;
-  </script>
-</body>
+    </script>
+  </body>
 </html>
