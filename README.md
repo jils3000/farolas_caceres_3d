@@ -1,17 +1,5 @@
 ﻿#Mapa en 3D con la geolocalización de las farolas de Cáceres.
 
-<<<<<<< HEAD
-Elaborado como parte del proyecto iniciado durante el Open Data Day (http://madrid.opendataday.org/) en Madrid, el 5 de marzo de 2016, en Medialab Prado (Madrid).
-
-Como se indica en la leyenda, el color del punto se corresponde con el tipo de lámpara instalada.
-
-* http://opencitydata.github.io/urbanismo-infraestructuras-alumbrado-publico/
-* https://github.com/jils3000/urbanismo-infraestructuras-alumbrado-publico
-
------------------------------------------------------------------------
-
-El código para la visualización de los edificios y farolas en 3D está basado en la entrada del blog "3D buildings with CartoCSS!" de Ramiro Aznar.
-=======
 Mapa elaborado como parte del proyecto iniciado durante el Open Data Day (http://madrid.opendataday.org/) en Medialab Prado (Madrid), el 5 de marzo de 2016. El objetivo de este proyecto es iniciar una reflexión sobre el alumbrado público de Cáceres para que todos seamos más consciente de una realidad con la que dormimos cada noche: la contaminación lumínica.
 
 ![captura 3d - 2](https://cloud.githubusercontent.com/assets/11415111/14582179/51cb7074-03fe-11e6-9b5e-f5d0dd02b3e3.PNG)
@@ -28,13 +16,9 @@ Enlaces al proyecto sobre contaminación lumínica:
 -----------------------------------------------------------------------
 
 El código utilizado para la visualización de los edificios y farolas en 3D está basado en la entrada del blog "3D buildings with CartoCSS!" de Ramiro Aznar.
->>>>>>> master
 
 * http://ramiroaznar.com/2016/04/05/3d-buildings-with-cartocss/
 
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> master
